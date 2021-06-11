@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+{% form_theme form _self %}
+
+{% block title %}Hello CurriculumController!{% endblock %}
+
+{% block body %}
+    {{form_start(form)}}
+    <section>
+        <h3>Give a name to this curriculum</h3>
+        <div class="row">
+            <div class="col">{{form_row(form.title)}}</div>
+            <div class="col">{{form_row(form.underTitle)}}</div>
+        </div>
+    </section>
+    <section>
+        <h3>Who are you ?</h3>
+        <div class="row" style="background-color:#c2e3e9;">
+            <div class="col">{{form_row(form.firstname)}}</div>
+            <div class="col">{{form_row(form.lastname)}}</div>
+        </div>
+    </section>
+        {{form_widget(form)}}
+    {{form_end(form)}}
+{% endblock %}
+
+{% block _curriculum_skills_entry_row %}
+    {{form_widget(form)}}
+{% endblock %}
+
+{% block _curriculum_skills_widget %}
+    <p>Add a new skill</p>
+    <button type="button" class="js-add-skill btn btn-secondary">+</button>
+    <input type="hidden" id="widgets-counter" value="0">
+    {{form_widget(form)}}
+{% endblock %}
+
+{% block _curriculum_skills_entry_widget %}
+    <div class="skill-group row" id="block_{{id}}">
+        <div class="col">{{form_widget(form.name)}}</div>
+        <div class="col">{{form_widget(form.level)}}</div>
+        <div class="col-1"><button type="button" data-target="#block_{{id}}" class="js-delete-skill btn btn-danger">X</button></div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('handleSkillsForm') }}
+{% endblock %}
